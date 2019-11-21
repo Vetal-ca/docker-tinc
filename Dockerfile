@@ -19,7 +19,7 @@ COPY --from=build /usr/share/info/tinc.info /usr/share/info/tinc.info
 COPY --from=build /usr/share/man/man5/tinc.conf.5 /usr/share/man/man5/tinc.conf.5
 COPY --from=build usr/share/man/man8/tinc* /usr/share/man/man8/
 
-RUN mkdir -p /etc/tinc
+RUN mkdir -p /etc/tinc && apk update && apk add readline ncurses
 
 ENTRYPOINT ["/usr/sbin/tinc"]
 
