@@ -13,7 +13,6 @@ RUN apk update && apk add gcc g++ make ncurses-dev linux-headers readline-dev zl
 
 FROM alpine:3.10
 
-COPY --from=build /usr/sbin/tinc /usr/sbin/tinc
 COPY --from=build /usr/sbin/tincd /usr/sbin/tincd
 COPY --from=build /usr/share/info/tinc.info /usr/share/info/tinc.info
 COPY --from=build /usr/share/man/man5/tinc.conf.5 /usr/share/man/man5/tinc.conf.5
