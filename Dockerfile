@@ -8,8 +8,8 @@ RUN apk update && apk add gcc g++ make ncurses-dev linux-headers readline-dev zl
 	cd /tmp && wget http://www.tinc-vpn.org/packages/tinc-${version}.tar.gz &&\
     tar xzvf tinc-${version}.tar.gz && \
     cd tinc-${version} && \
-	./configure --prefix=/usr --enable-jumbograms --enable-tunemu --sysconfdir=/etc --localstatedir=/var
-RUN	cd /tmp/tinc-${version} && make && make install src
+	./configure --prefix=/usr --enable-jumbograms --enable-tunemu --sysconfdir=/etc --localstatedir=/var &&\
+	make && make install src
 
 FROM alpine:3.10
 
@@ -21,4 +21,4 @@ COPY --from=build usr/share/man/man8/tinc* /usr/share/man/man8/
 
 RUN mkdir -p /etc/tinc && apk update && apk add readline ncurses lzo
 
-ENTRYPOINT ["/usr/sbin/tinc"]
+ENTRYPOINT ["/usr/sbin/tincd"]
