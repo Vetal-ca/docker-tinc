@@ -1,7 +1,7 @@
-FROM alpine:3.10 as build
+FROM alpine:3.13.2 as build
 MAINTAINER "Vitali Khlebko vitali.khlebko@vetal.ca"
 
-ENV version=1.0.35
+ENV version=1.0.36
 
 
 RUN apk update && apk add gcc g++ make ncurses-dev linux-headers readline-dev zlib-dev lzo-dev openssl-dev libpcap-dev &&\
@@ -11,7 +11,7 @@ RUN apk update && apk add gcc g++ make ncurses-dev linux-headers readline-dev zl
 	./configure --prefix=/usr --enable-jumbograms --enable-tunemu --sysconfdir=/etc --localstatedir=/var &&\
 	make && make install src
 
-FROM alpine:3.10
+FROM alpine:3.13.2
 
 COPY --from=build /usr/sbin/tincd /usr/sbin/tincd
 COPY --from=build /usr/share/info/tinc.info /usr/share/info/tinc.info
